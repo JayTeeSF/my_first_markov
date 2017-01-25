@@ -24,11 +24,23 @@ if File.basename(__FILE__) == File.basename($PROGRAM_NAME)
 
       $0  a                    ./test/sample_text.txt         [random_next]         character
       > p
+
+      OR
+
+      $0 <firstN> <file-glob of entry observations> <split_on: word* | character> <next_method: first>
     EOH
     warn(msg)
     exit
+  elsif starting_entry =~ /\-\-first/
+    next_method = starting_entry.dup[2..-1]
+    starting_entry = nil
+    #puts "calling MyFirstMarkov::Chain.file_to_entries(#{file}, #{split_on.inspect}, #{starting_entry.inspect}, #{next_method.inspect})"
+    entries, _na, next_method, count = MyFirstMarkov::Chain.file_to_entries(file, split_on, starting_entry, next_method)
+    mc = MyFirstMarkov::Chain.new(entries)
+    puts mc.send(next_method, count)
+    exit
   end
 
-  puts "calling MyFirstMarkov::Chain.from_file(#{file}, #{split_on.inspect}, #{starting_entry.inspect}, #{next_method.inspect})"
+  #puts "calling MyFirstMarkov::Chain.from_file(#{file}, #{split_on.inspect}, #{starting_entry.inspect}, #{next_method.inspect})"
   puts MyFirstMarkov::Chain.from_file(file, split_on, starting_entry, next_method)
 end

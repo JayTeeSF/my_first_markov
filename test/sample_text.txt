@@ -1,1 +1,5 @@
-apple this apple is a text\nthis apple was a text\nthis is a big apple text\nthis could be an apple big old apple text\nthis apple is not apple  text apple
+apple this apple is a text
+this apple was a text
+this is a big apple text
+this could be an apple big old apple text
+this apple is not apple  text apple
