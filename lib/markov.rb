@@ -1,3 +1,3 @@
 module Markov
 end
-require_relative "./lib/chain.rb"
+require_relative "./markov/chain.rb"

@@ -11,21 +11,23 @@ end
 
 if File.basename(__FILE__) == File.basename($PROGRAM_NAME)
   starting_entry = ARGV[0]
-  puts "ARGV[0]: #{ARVG[0].inspect}, ARGV[1]: #{ARGV[1].inspect}, ARGV[2]: #{ARGV[2].inspect}"
-  if starting_entry =~ /(\-\-\?)|(\-\-help)/i || ARGV[1].nil?
-    msg = <<-EOH
-      $0 <some starting entry> <split-on: word|character> <file-glob of entry observations>
-      e.g.
-      $0  It                  word                       ./emails/*.eml
-      > was
+  file = ARGV[1]
+  next_method = ARGV[2]
+  split_on = ARGV[3]
 
-      $0  A                    character                  ./some_writing_sample.txt
-      > Apple
+  if [starting_entry, file].include?(nil) || (starting_entry =~ /(\-\-\?)|(\-\-help)/i)
+    msg = <<-EOH
+      $0 <some starting entry> <file-glob of entry observations> <split_on: word* | character> <next_method: random_next* | most_likely_next>
+      e.g.
+      $0  this                  ./test/sample_text.txt        [random_next]         [word]
+      > apple
+
+      $0  a                    ./test/sample_text.txt         [random_next]         character
+      > p
     EOH
     warn(msg)
     exit
   end
 
-  entries = File.read(ARGV[1])
-  Markov::Chain.new(starting_entry, entries)
+  puts Markov::Chain.from_file(file, split_on, starting_entry, next_method)
 end
