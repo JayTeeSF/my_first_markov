@@ -2,11 +2,11 @@
 
 begin
   require "rubygems"
-  gem "markov"
-  require "markov"
+  gem "my_first_markov"
+  require "my_first_markov"
 rescue LoadError => e
   warn "LoadError: #{e.message.inspect}"
-  require_relative "../lib/markov"
+  require_relative "../lib/my_first_markov"
 end
 
 if File.basename(__FILE__) == File.basename($PROGRAM_NAME)
@@ -29,5 +29,5 @@ if File.basename(__FILE__) == File.basename($PROGRAM_NAME)
     exit
   end
 
-  puts Markov::Chain.from_file(file, split_on, starting_entry, next_method)
+  puts MyFirstMarkov::Chain.from_file(file, split_on, starting_entry, next_method)
 end

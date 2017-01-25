@@ -1,4 +1,4 @@
-module Markov
+module MyFirstMarkov
   class Chain
 
     def self.next_methods
@@ -18,13 +18,13 @@ module Markov
     end
 
     def self.from_file(file, split_on, starting_entry, next_method)
-      unless split_on && Markov::Chain.split_on_values.include?(split_on.downcase)
-        split_on = Markov::Chain.default_split_on_value
+      unless split_on && MyFirstMarkov::Chain.split_on_values.include?(split_on.downcase)
+        split_on = MyFirstMarkov::Chain.default_split_on_value
       end
       split_on.downcase!
 
-      unless next_method && Markov::Chain.next_methods.include?(next_method.downcase)
-        next_method = Markov::Chain.default_next_method
+      unless next_method && MyFirstMarkov::Chain.next_methods.include?(next_method.downcase)
+        next_method = MyFirstMarkov::Chain.default_next_method
       end
       next_method.downcase!
 
