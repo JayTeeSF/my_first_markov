@@ -29,5 +29,6 @@ if File.basename(__FILE__) == File.basename($PROGRAM_NAME)
     exit
   end
 
+  puts "calling MyFirstMarkov::Chain.from_file(#{file}, #{split_on.inspect}, #{starting_entry.inspect}, #{next_method.inspect})"
   puts MyFirstMarkov::Chain.from_file(file, split_on, starting_entry, next_method)
 end

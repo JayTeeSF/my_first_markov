@@ -21,22 +21,20 @@ module MyFirstMarkov
       unless split_on && MyFirstMarkov::Chain.split_on_values.include?(split_on.downcase)
         split_on = MyFirstMarkov::Chain.default_split_on_value
       end
-      split_on.downcase!
 
       unless next_method && MyFirstMarkov::Chain.next_methods.include?(next_method.downcase)
         next_method = MyFirstMarkov::Chain.default_next_method
       end
-      next_method.downcase!
 
       unless File.exists?(file)
         fail("Unknown file: #{file.inspect}")
       end
 
       data = File.read(file)
-      ("word" == split_on) ? entries = data.split : entries = data.split(//)
+      ("word" == split_on.downcase) ? entries = data.split : entries = data.split(//)
       entries ||= []
 
-      new(entries).send(next_method, starting_entry)
+      new(entries).send(next_method.downcase, starting_entry)
     end
 
     def initialize(ordered_list)
